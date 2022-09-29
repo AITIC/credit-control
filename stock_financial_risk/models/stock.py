@@ -43,26 +43,29 @@ class StockPicking(models.Model):
         )
 
     def action_confirm(self):
-        if not self.env.context.get("bypass_risk"):
-            if (
-                self.location_dest_id.usage == "customer"
-                and self.partner_id.commercial_partner_id.risk_exception
-            ):
-                return self.show_risk_wizard("action_confirm")
+        for picking in self:
+            if not picking.env.context.get("bypass_risk"):
+                if (
+                    picking.location_dest_id.usage == "customer"
+                    and picking.partner_id.commercial_partner_id.risk_exception
+                ):
+                    return picking.show_risk_wizard("action_confirm")
         return super(StockPicking, self).action_confirm()
 
     def action_assign(self):
-        if not self.env.context.get("bypass_risk") and self.filtered(
-            "partner_id.commercial_partner_id.risk_exception"
-        ):
-            return self.show_risk_wizard("action_assign")
+        for picking in self:
+            if not picking.env.context.get("bypass_risk") and picking.filtered(
+                "partner_id.commercial_partner_id.risk_exception"
+            ):
+                return picking.show_risk_wizard("action_assign")
         return super(StockPicking, self).action_assign()
 
     def button_validate(self):
-        if not self.env.context.get("bypass_risk"):
-            if (
-                self.location_dest_id.usage == "customer"
-                and self.partner_id.commercial_partner_id.risk_exception
-            ):
-                return self.show_risk_wizard("button_validate")
+        for picking in self:
+            if not self.env.context.get("bypass_risk"):
+                if (
+                    picking.location_dest_id.usage == "customer"
+                    and picking.partner_id.commercial_partner_id.risk_exception
+                ):
+                    return picking.show_risk_wizard("button_validate")
         return super(StockPicking, self).button_validate()

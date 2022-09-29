@@ -102,7 +102,7 @@ class AccountMove(models.Model):
             # Active active_model is False if we click in form view header buttons
             # as 'Confirm'.
             return (
-                self.env["partner.risk.exceeded.wiz"]
+                self.env["partner.risk.exceeded.wiz"].sudo()
                 .create(
                     {
                         "exception_msg": exception_msg,

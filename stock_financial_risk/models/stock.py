@@ -30,7 +30,7 @@ class StockPicking(models.Model):
 
     def show_risk_wizard(self, continue_method):
         return (
-            self.env["partner.risk.exceeded.wiz"]
+            self.env["partner.risk.exceeded.wiz"].sudo()
             .create(
                 {
                     "exception_msg": _("Financial risk exceeded \n"),

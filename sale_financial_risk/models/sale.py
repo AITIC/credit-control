@@ -39,7 +39,7 @@ class SaleOrder(models.Model):
                 exception_msg = order.evaluate_risk_message(partner)
                 if exception_msg:
                     return (
-                        self.env["partner.risk.exceeded.wiz"]
+                        self.env["partner.risk.exceeded.wiz"].sudo()
                         .create(
                             {
                                 "exception_msg": exception_msg,

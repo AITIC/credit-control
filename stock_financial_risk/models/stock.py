@@ -52,13 +52,13 @@ class StockPicking(models.Model):
                     return picking.show_risk_wizard("action_confirm")
         return super(StockPicking, self).action_confirm()
 
-    def action_assign(self):
-        for picking in self:
-            if not picking.env.context.get("bypass_risk") and picking.filtered(
-                "partner_id.commercial_partner_id.risk_exception"
-            ):
-                return picking.show_risk_wizard("action_assign")
-        return super(StockPicking, self).action_assign()
+    #def action_assign(self):
+    #    for picking in self:
+    #        if not picking.env.context.get("bypass_risk") and picking.filtered(
+    #            "partner_id.commercial_partner_id.risk_exception"
+    #        ):
+    #            return picking.show_risk_wizard("action_assign")
+    #    return super(StockPicking, self).action_assign()
 
     def button_validate(self):
         for picking in self:

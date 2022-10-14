@@ -50,6 +50,11 @@ class StockPicking(models.Model):
                     and picking.partner_id.commercial_partner_id.risk_exception
                 ):
                     return picking.show_risk_wizard("action_confirm")
+                elif (
+                    picking.location_dest_id.usage == "internal"
+                    and picking.partner_id and picking.partner_id.commercial_partner_id.risk_exception
+                ):
+                    return picking.show_risk_wizard("action_confirm")
         return super(StockPicking, self).action_confirm()
 
     #def action_assign(self):
@@ -68,4 +73,9 @@ class StockPicking(models.Model):
                     and picking.partner_id.commercial_partner_id.risk_exception
                 ):
                     return picking.show_risk_wizard("button_validate")
+                elif (
+                    picking.location_dest_id.usage == "internal"
+                    and picking.partner_id and picking.partner_id.commercial_partner_id.risk_exception
+                ):
+                    return picking.show_risk_wizard("action_confirm")
         return super(StockPicking, self).button_validate()

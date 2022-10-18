@@ -45,12 +45,12 @@ class StockPicking(models.Model):
     def action_confirm(self):
         for picking in self:
             if not picking.env.context.get("bypass_risk"):
+                #if (
+                #    picking.location_dest_id.usage == "customer"
+                #    and picking.partner_id.commercial_partner_id.risk_exception
+                #):
+                #    return picking.show_risk_wizard("action_confirm")
                 if (
-                    picking.location_dest_id.usage == "customer"
-                    and picking.partner_id.commercial_partner_id.risk_exception
-                ):
-                    return picking.show_risk_wizard("action_confirm")
-                elif (
                     picking.location_dest_id.usage == "internal"
                     and picking.partner_id and picking.partner_id.commercial_partner_id.risk_exception
                 ):
@@ -68,12 +68,12 @@ class StockPicking(models.Model):
     def button_validate(self):
         for picking in self:
             if not self.env.context.get("bypass_risk"):
+                #if (
+                #    picking.location_dest_id.usage == "customer"
+                #    and picking.partner_id.commercial_partner_id.risk_exception
+                #):
+                #    return picking.show_risk_wizard("button_validate")
                 if (
-                    picking.location_dest_id.usage == "customer"
-                    and picking.partner_id.commercial_partner_id.risk_exception
-                ):
-                    return picking.show_risk_wizard("button_validate")
-                elif (
                     picking.location_dest_id.usage == "internal"
                     and picking.partner_id and picking.partner_id.commercial_partner_id.risk_exception
                 ):

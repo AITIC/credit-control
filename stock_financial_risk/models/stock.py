@@ -11,7 +11,7 @@ class StockMove(models.Model):
         if not self.env.context.get("bypass_risk"):
             moves = self.filtered(
                 lambda x: (
-                    x.location_dest_id.usage == "customer"
+                    x.location_dest_id.usage == "internal"
                     and x.partner_id.commercial_partner_id.risk_exception
                 )
             )

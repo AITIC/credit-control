@@ -77,5 +77,5 @@ class StockPicking(models.Model):
                     picking.location_dest_id.usage == "internal"
                     and picking.partner_id and picking.partner_id.commercial_partner_id.risk_exception
                 ):
-                    return picking.show_risk_wizard("action_confirm")
+                    return picking.show_risk_wizard("button_validate")
         return super(StockPicking, self).button_validate()
